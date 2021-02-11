@@ -6,8 +6,12 @@ from polls.models import Question
 
 
 def index(request):
+    # user_input = request.GET["search"]
+    # prediction = fake_model.fake_predict(user_input)
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = { 'latest_question_list': latest_question_list }
+    # pred = {'prediction': prediction}
+    context = {'latest_question_list': latest_question_list}
+
     return render(request, 'polls/index.html', context)
 
 
@@ -20,5 +24,7 @@ def results(request, question_id):
     response = "You're looking at the results of question %s."
     return HttpResponse(response % question_id)
 
+
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
+
